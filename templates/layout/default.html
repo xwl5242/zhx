@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+{# 不是pjax请求,返回整个页面 #}
+{%if T_N=='FULL'%}
+<html>
+<head>
+	{% include "../commons/head.html"%}
+    {% block header %}{% end %}
+</head>
+<body class="{{theme.TAB_FLAG}} {{theme.MENU_DISPLAY}} {% if theme.MENU_DISPLAY=='site-menubar-fold'%} {{theme.MENU_TEXT_ICON}} {% end %} ">
+    <!-- 菜单 -->
+    {% include "../commons/menu.html"%}
+	<main class="site-page">
+	    <div class="page-container" id="admui-pageContent">
+            <!--?用户主题信息-->
+            <input type="hidden" id="theme_json" value="{{theme_json}}" />
+			{% block body %}{% end %}
+		</div>
+	    <div class="page-loading vertical-align text-center">
+	        <div class="page-loader loader-default loader vertical-align-middle" data-type="default"></div>
+	    </div>
+	</main>
+	{% include "../commons/footer.html"%}
+    <script>
+        //设置当前用户的主题信息
+        theme_json = $("#theme_json").val()
+        localStorage.setItem("admui.base.skinTools",theme_json)
+    </script>
+</body>
+</html>
+{%end%}
+
+{# 是pjax请求,返回部分页面 #}
+{%if T_N=='PART'%}
+    {% block header %}{% end %}
+    {% block body %}{% end %}
+{%end%}

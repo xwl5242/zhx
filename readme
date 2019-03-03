@@ -1,0 +1,7 @@
+pip install tornado
+pip install torndb
+torndb在python3.x环境下需要修改源代码，具体参考：https://www.cnblogs.com/venz-seventeen/p/7818806.html
+pip install pymysql
+pip install Pillow
+linux :pip install pycryptodome
+window :pip install pycryptodomex

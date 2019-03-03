@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html class="no-js css-menubar height-full" lang="zh-cn">
+<head>
+    <title>请重新登录</title>
+	<meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- 移动设备 viewport -->
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no,minimal-ui">
+    <meta name="renderer" content="webkit"><!-- 360浏览器默认使用Webkit内核 -->
+    <meta http-equiv="Cache-Control" content="no-siteapp"><!-- 禁止百度SiteAPP转码 -->
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="Admui">
+    <meta name="msapplication-TileColor" content="#62a8ea">
+    <!-- 样式 -->
+    <link rel="stylesheet" href="{{static_url('admui/themes/classic/base/css/site.css')}}" id="siteStyle">
+    <!-- 自定义 -->
+    <link rel="stylesheet" href="{{static_url('admui/css/locked.css')}}">
+    <!-- 插件 -->
+    <link rel="stylesheet" href="{{static_url('admui/plugins/animsition/animsition.css')}}">
+    <!-- 图标 -->
+    <link rel="stylesheet" href="{{static_url('admui/fonts/web-icons/web-icons.css')}}">
+</head>
+
+<body class="page-locked layout-full page-dark">
+	<div class=" page animation-fade vertical-align text-center animsition-fade height-full">
+	    <div class="page-content vertical-align-middle">
+	        <div class="avatar avatar-lg">
+	            <img src="{{static_url('admui/images/avatar.svg')}}" alt="{{user.USER_CODE}}">
+	        </div>
+	        <h4 class="locked-user">{{user.USER_CODE}}</h4>
+	        <form action="/login" method="post" role="form">
+	            <div class="input-group">
+	            	<input type="hidden" name="userCode" value="{{user.USER_CODE}}">
+	            	<input type="hidden" name="needCaptcha" value="False">
+	            	<input type="hidden" name="validCode" value="true">
+	                <input type="password" class="form-control last" name="password" placeholder="请输入您的密码继续登录">
+	                <span class="input-group-btn">
+	                    <button type="submit" class="btn btn-primary">
+	                        <i class="icon wb-unlock" aria-hidden="true"></i>
+	                        <span class="sr-only">登录</span>
+	                    </button>
+	                </span>
+	            </div>
+	        </form>
+	    </div>
+	</div>
+</body>
+</html>
