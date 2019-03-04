@@ -4,6 +4,7 @@ import json
 from web.base.base_handler import BaseHandler
 from modules.sys.dict import Dict
 from modules.youtools.base_tools import BaseTools
+from modules.youtools.detail_tools import DetailTools
 from modules.youtools.banner import Banner
 from modules.youtools.icon import Icon
 
@@ -53,7 +54,7 @@ class ToolsHandler(BaseHandler):
         tool_types = Dict.query_list("select dc_k type from sys_dic where dc_name='tools_type'")
 
         # 查询所有种类tools的前6名
-        query_sql = "SELECT A.*, d.dc_v type_name FROM( SELECT t.* FROM t_base_tools t WHERE 6 > ( SELECT count( 1) " \
+        query_sql = "SELECT A.*, d.dc_v type_name FROM( SELECT t.* FROM t_base_tools t WHERE 3 > ( SELECT count( 1) " \
                     "FROM t_base_tools WHERE type = t.type AND seq < t.seq AND is_del = '0' ) ) A " \
                     "LEFT JOIN sys_dic d ON A.type = d.dc_k WHERE d.dc_name = 'tools_type' ORDER BY A.type, A.seq ASC"
         tool_list = BaseTools.query_list(query_sql)
@@ -68,7 +69,47 @@ class ToolsHandler(BaseHandler):
                     type_name = tool['type_name']
                     t_type = tool['type']
                     type_list.append(tool)
-            if len(type_list)>0:
+            if len(type_list) > 0:
+                if len(type_list)<3:
+                    for i in range(3-len(type_list)):
+                        type_list.append({})
                 tools.append({'type_name': type_name, 'tool_type': t_type, 'data': type_list})
+
         # 返回json数据
         self.write(json.dumps(tools))
+
+
+class DetailToolsHandler(BaseHandler):
+
+    def get(self, *args, **kwargs):
+        """
+        获取工具详情
+        :param args:
+        :param kwargs:
+        :return:
+        """
+        # 查询平台信息
+        plat_dict = {}
+        plats = Dict.query_list("select dc_k plat,dc_v plat_name from sys_dic where dc_name='plat_label'")
+        for plat in plats:
+            plat_dict[plat.plat] = plat.plat_name
+        # 查询工具详情
+        tool_id = kwargs.get('tool_id')
+        tool = DetailTools.get_by_id('t_detail_tools', tool_id)
+        # 处理工具的图片信息，img_urls是以分号";"为分隔的多个图片地址
+        img_urls = tool.get('img_urls')
+        urls = img_urls.split(';')
+        # img_url 为封面图片地址
+        tool['img_url'] = '' if len(urls) == 0 else urls[0]
+        # img_urls 为所有该工具图片信息地址
+        tool['img_urls'] = list(urls)
+        tool_plat = {}
+        if tool['plat_label']:
+            p_ls = list(tool['plat_label'].split(','))
+            for p_l in p_ls:
+                tool_plat[plat_dict[p_l]] = True
+            tool['tool_palt'] = tool_plat
+
+        print(tool)
+        self.write(tool)
+
