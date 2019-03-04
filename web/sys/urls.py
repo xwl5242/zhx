@@ -5,12 +5,8 @@ from web.sys.user_handler import *
 from web.sys.role_handler import *
 from web.sys.right_handler import *
 from web.sys.system_handler import *
-from web.sys.youtools_handler import *
 
 sys_urls = [
-    (r"/banners", BannersHandler),
-    (r"/icons", IconsHandler),
-    (r"/tools", ToolsHandler),
     (r"/home", HomeHandler),
     (r"/captcha", CaptchaHandler),
     (r"/login", LoginHandler),

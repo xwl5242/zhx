@@ -23,12 +23,12 @@ class BaseModel(dict):
     )
 
     def __init__(self, **kwargs):
-        self.ID = kwargs.get('ID') if kwargs.get('ID') else ''.join(str(uuid.uuid4()).split('-'))
-        self.IS_DEL = kwargs.get('IS_DEL', '0')
-        self.CREATOR = kwargs.get('CREATOR', '')
-        self.CREATE_TIME = kwargs.get('CREATE_TIME', time.strftime('%Y-%m-%d %H:%M:%S', time.localtime()))
-        self.UPDATOR = kwargs.get('UPDATOT', '')
-        self.UPDATE_TIME = kwargs.get('UPDATE_TIME', time.strftime('%Y-%m-%d %H:%M:%S', time.localtime()))
+        self.id = kwargs.get('id') if kwargs.get('id') else ''.join(str(uuid.uuid4()).split('-'))
+        self.is_del = kwargs.get('is_del', '0')
+        self.creator = kwargs.get('creator', '')
+        self.create_time = kwargs.get('create_time', time.strftime('%Y-%m-%d %H:%M:%S', time.localtime()))
+        self.updator = kwargs.get('updator', '')
+        self.update_time = kwargs.get('update_time', time.strftime('%Y-%m-%d %H:%M:%S', time.localtime()))
 
     def __setattr__(self, key, value):
         self[key] = value
@@ -59,7 +59,8 @@ class BaseModel(dict):
             sql = f"select group_concat(column_name) cns from information_schema.columns " \
                   f"where table_name='{table}' and TABLE_SCHEMA='{cls.configs.D_MYSQL_DATABASE}'"
         # 返回字段字符串
-        return cls.db.get(sql)["cns"]
+        columns_str = cls.db.get(sql)['cns']
+        return columns_str.lower()
 
     @classmethod
     def insert(cls, table, model):
@@ -122,7 +123,7 @@ class BaseModel(dict):
         :param where: 删除条件
         :return:
         """
-        return cls.update(table, {'IS_DEL': '1'}, where=where)
+        return cls.update(table, {'is_del': '1'}, where=where)
 
     @classmethod
     def delete_by_sql(cls, sql):
