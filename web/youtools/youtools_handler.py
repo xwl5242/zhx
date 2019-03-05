@@ -1,6 +1,7 @@
 # coding=utf-8
 
 import json
+import time
 from web.base.base_handler import BaseHandler
 from modules.sys.dict import Dict
 from modules.youtools.base_tools import BaseTools
@@ -43,7 +44,7 @@ class IconsHandler(BaseHandler):
         self.write(json.dumps(icons))
 
 
-class ToolsHandler(BaseHandler):
+class ToolsIndexHandler(BaseHandler):
 
     def get(self):
         """
@@ -79,7 +80,7 @@ class ToolsHandler(BaseHandler):
         self.write(json.dumps(tools))
 
 
-class DetailToolsHandler(BaseHandler):
+class ToolsDetailHandler(BaseHandler):
 
     def get(self, *args, **kwargs):
         """
@@ -108,8 +109,30 @@ class DetailToolsHandler(BaseHandler):
             p_ls = list(tool['plat_label'].split(','))
             for p_l in p_ls:
                 tool_plat[plat_dict[p_l]] = True
-            tool['tool_palt'] = tool_plat
-
-        print(tool)
+            tool['tool_plat'] = tool_plat
         self.write(tool)
+
+
+class ToolsTypeHandler(BaseHandler):
+
+    def get(self, *args, **kwargs):
+        tool_type = kwargs.get('tool_type', '')
+        start = kwargs.get('start', 0)
+        count = kwargs.get('count')
+        tools = BaseTools.query_list(f"select t.*,d.dc_v type_name from t_base_tools t "
+                                     f"left join sys_dic d on t.type = d.dc_k "
+                                     f"where t.type='{tool_type}' and d.dc_name='tools_type' "
+                                     f"limit {start},{start+count}")
+        self.write(json.dumps(tools))
+
+
+class ToolsSearchHandler(BaseHandler):
+
+    def get(self):
+        q = self.get_argument('q')
+        query_sql = f"select t.*,d.dc_v type_name from t_base_tools t left join sys_dic d on t.type = d.dc_k " \
+                    f"where d.dc_name='tools_type' and t.`name` like '%%{q}%%'"
+        tools = BaseTools.query_list(query_sql)
+        self.write(json.dumps(tools))
+
 
