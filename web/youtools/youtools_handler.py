@@ -40,6 +40,7 @@ class IconsHandler(BaseHandler):
                 icon_list.append(icon)
             i += 1
         icons.append(icon_list)
+        icons = icons[:-1]
         self.write(json.dumps(icons))
 
 
