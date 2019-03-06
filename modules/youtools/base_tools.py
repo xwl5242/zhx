@@ -9,3 +9,4 @@ class BaseTools(BaseModel):
         self.type = kwargs.get('type', '')
         self.img_url = kwargs.get('img_url', '')
         self.name = kwargs.get('name', '')
+        super(BaseTools, self).__init__(**kwargs)

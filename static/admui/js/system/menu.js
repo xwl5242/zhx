@@ -198,7 +198,7 @@
             //删除顶部菜单
             $content.on('click', '[data-tag="list-delete"]', function (e) { 
                 var $item = $(this).parents('div[data-children]'), str,
-                    ID = $item.data('id'),
+                    id = $item.data('id'),
                     callback = function () {
                         if ($item.is('.active')) {
                             if ($item.next('[data-children]').size() > 0) {
@@ -222,7 +222,7 @@
                 alertify.theme('bootstrap')
                     .confirm("您确定要删除该菜单吗？", function () {
                         $.ajax({
-                            url: $.ctx + 'right/delete?id=' + ID,
+                            url: $.ctx + 'right/delete?id=' + id,
                             type: 'POST',
                             dataType: 'JSON',
                             success: function (data) {
@@ -319,7 +319,7 @@
             $content.on('click', '.delete-submenu', function () {
                 var data, sure = false,
                     $item = $("[data-plugin='nestable']").find('.active').parent('li'),
-                    ID = $item.data('id'),
+                    id = $item.data('id'),
                     delSubmenu = function () {
                         if ($item.next().size() > 0) {
                             $item.next().children('.dd-content').addClass('active');
@@ -352,7 +352,7 @@
                     .confirm("您确定要删除该菜单吗？", function () {
                         if (ID !== "") {
                             $.ajax({
-                                url: $.ctx + 'right/delete/' + ID,
+                                url: $.ctx + 'right/delete/' + id,
                                 type: 'POST',
                                 dataType: 'JSON',
                                 success: function (data) {
@@ -387,8 +387,8 @@
                         text: "自定义菜单一",
                         type: "add",
                         url: "#",
-                        ICON: "fa-file-o",
-                        PID: $('.list-group .active').data('id')
+                        icon: "fa-file-o",
+                        pid: $('.list-group .active').data('id')
                     }];
                     self.submenuRender(menuData);
                     return;

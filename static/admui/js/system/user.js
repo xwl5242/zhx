@@ -172,11 +172,11 @@
                             return checkbox;
                         }
                     },
-                    {"data": "USER_CODE"},
-                    {"data": "USER_NAME"},
-                    {"data": "CREATE_TIME"},
-                    {"data": "LAST_LOGIN_TIME"},
-                    {"data": "LOGIN_TOTAL"},
+                    {"data": "user_code"},
+                    {"data": "user_name"},
+                    {"data": "create_time"},
+                    {"data": "last_login_time"},
+                    {"data": "login_total"},
                     {
                         "render": function () {
                             var edit = '<button type="button" class="btn btn-sm btn-icon btn-pure btn-default"' + ' data-toggle="edit"><i class="icon wb-edit" aria-hidden="true" title="修改"></i></button>'+
@@ -187,11 +187,11 @@
                     }
                 ],
                 rowCallback: function (row, data) {
-                    if (data.USE_STATUS === "FORBIDDEN") {
+                    if (data.use_state === "FORBIDDEN") {
                         $(row).addClass('disabled');
                     }
 
-                    if (data.ID == self.currentUser) {
+                    if (data.id == self.currentUser) {
                         $(row).find('input:checkbox').prop('disabled', true);
                     }
                 }
@@ -204,11 +204,11 @@
             	self.$item = getCurItem(this);
             	self.thisRow = self.table.row(self.$item).data();
             	alertify.theme('bootstrap')
-	                .confirm('你确定要禁用 '+self.thisRow.USER_CODE+' 用户吗？', function () {
+	                .confirm('你确定要禁用 '+self.thisRow.user_code+' 用户吗？', function () {
 	                    $.ajax({
 	                        url: $.ctx + 'user/updateUseStatus',
 	                        type: 'POST',
-	                        data: {id: self.thisRow.ID,useStatus: 'FORBIDDEN'},
+	                        data: {id: self.thisRow.id,useStatus: 'FORBIDDEN'},
 	                        traditional: true,
 	                        dataType: 'JSON',
 	                        success: function (data) {

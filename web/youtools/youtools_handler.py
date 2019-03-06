@@ -1,7 +1,6 @@
 # coding=utf-8
 
 import json
-import time
 from web.base.base_handler import BaseHandler
 from modules.sys.dict import Dict
 from modules.youtools.base_tools import BaseTools
@@ -25,7 +24,7 @@ class IconsHandler(BaseHandler):
 
     def get(self):
         """
-        获取首页分类图标
+        获取首页分类图标，格式[[],[],[]],list[list]
         :return:
         """
         icons_list = Icon.query_list("select * from t_icon where is_del='0' ORDER BY seq asc")
@@ -70,9 +69,12 @@ class ToolsIndexHandler(BaseHandler):
                     type_name = tool['type_name']
                     t_type = tool['type']
                     type_list.append(tool)
+            # 存在tool
             if len(type_list) > 0:
-                if len(type_list)<3:
+                # 如果返回的list小于3个，需要考虑页面显示问题，少几个补几个空白位置
+                if len(type_list) < 3:
                     for i in range(3-len(type_list)):
+                        # 补空白位置
                         type_list.append({})
                 tools.append({'type_name': type_name, 'tool_type': t_type, 'data': type_list})
 
@@ -104,11 +106,13 @@ class ToolsDetailHandler(BaseHandler):
         tool['img_url'] = '' if len(urls) == 0 else urls[0]
         # img_urls 为所有该工具图片信息地址
         tool['img_urls'] = list(urls)
+        # 添加tool的平台信息,windows:1;mac:2;android:3;ios:4
         tool_plat = {}
         if tool['plat_label']:
             p_ls = list(tool['plat_label'].split(','))
             for p_l in p_ls:
                 tool_plat[plat_dict[p_l]] = True
+            # tool['windows'] = true/false
             tool['tool_plat'] = tool_plat
         self.write(tool)
 
@@ -116,9 +120,18 @@ class ToolsDetailHandler(BaseHandler):
 class ToolsTypeHandler(BaseHandler):
 
     def get(self, *args, **kwargs):
+        """
+        根据类型查询tool集合
+        :param args:
+        :param kwargs:
+        :return:
+        """
+        # 获取请求中的tool的类型
         tool_type = kwargs.get('tool_type', '')
+        # 分页信息，start：开始位置，count：显示多少个
         start = kwargs.get('start', 0)
         count = kwargs.get('count')
+        # 执行查询，返回tool集合list
         tools = BaseTools.query_list(f"select t.*,d.dc_v type_name from t_base_tools t "
                                      f"left join sys_dic d on t.type = d.dc_k "
                                      f"where t.type='{tool_type}' and d.dc_name='tools_type' "
@@ -129,9 +142,16 @@ class ToolsTypeHandler(BaseHandler):
 class ToolsSearchHandler(BaseHandler):
 
     def get(self):
+        """
+        根据关键字搜索
+        :return:
+        """
+        # 获取请求中的关键字
         q = self.get_argument('q')
+        # 查询sql
         query_sql = f"select t.*,d.dc_v type_name from t_base_tools t left join sys_dic d on t.type = d.dc_k " \
                     f"where d.dc_name='tools_type' and t.`name` like '%%{q}%%'"
+        # 执行查询，返回tool的list
         tools = BaseTools.query_list(query_sql)
         self.write(json.dumps(tools))
 

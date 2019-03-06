@@ -7,8 +7,8 @@ class Role(BaseModel):
     用户
     """
     def __init__(self, **kwargs):
-        self.ROLE_NAME = kwargs.get('ROLE_NAME', '')
-        self.ROLE_DESC = kwargs.get('ROLE_DESC', '')
+        self.role_name = kwargs.get('role_name', '')
+        self.role_desc = kwargs.get('role_desc', '')
         super(Role, self).__init__(**kwargs)
 
     # 角色表

@@ -7,19 +7,19 @@ class User(BaseModel):
     用户
     """
     def __init__(self, **kwargs):
-        self.USER_CODE = kwargs.get('USER_CODE', '')
-        self.USER_NAME = kwargs.get('USER_CODE', '')
-        self.PASSWORD = kwargs.get('USER_CODE', '')
-        self.NICK_NAME = kwargs.get('USER_CODE', '')
-        self.PHONE = kwargs.get('USER_CODE', '')
-        self.MAIL = kwargs.get('USER_CODE', '')
-        self.SEX = kwargs.get('USER_CODE', '')
-        self.AGE = kwargs.get('USER_CODE', '')
-        self.TYPE = kwargs.get('USER_CODE', '')
-        self.USE_STATUS = kwargs.get('USER_CODE', '')
-        self.LAST_LOGIN_TIME = kwargs.get('USER_CODE', '')
-        self.LOGIN_TOTAL = kwargs.get('USER_CODE', '')
-        self.THEME_ID = kwargs.get('USER_CODE', '')
+        self.user_code = kwargs.get('user_code', '')
+        self.user_name = kwargs.get('user_name', '')
+        self.password = kwargs.get('password', '')
+        self.nick_name = kwargs.get('nick_name', '')
+        self.phone = kwargs.get('phone', '')
+        self.mail = kwargs.get('mail', '')
+        self.sex = kwargs.get('sex', '')
+        self.age = kwargs.get('age', '')
+        self.type = kwargs.get('type', '')
+        self.use_status = kwargs.get('use_status', '')
+        self.last_login_time = kwargs.get('last_login_time', '')
+        self.login_total = kwargs.get('login_total', '')
+        self.theme_id = kwargs.get('theme_id', '')
         super(User, self).__init__(**kwargs)
 
     # 用户表

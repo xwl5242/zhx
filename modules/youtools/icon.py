@@ -9,3 +9,4 @@ class Icon(BaseModel):
         self.img_url = kwargs.get('img_url', '')
         self.name = kwargs.get('name', '')
         self.fragment = kwargs.get('fragment', '')
+        super(Icon, self).__init__(**kwargs)

@@ -9,3 +9,4 @@ class Banner(BaseModel):
         self.img_url = kwargs.get('img_url', '')
         self.name = kwargs.get('name', '')
         self.url = kwargs.get('url', '')
+        super(Banner, self).__init__(**kwargs)

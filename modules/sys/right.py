@@ -8,13 +8,13 @@ class Right(BaseModel):
     权限类
     """
     def __init__(self, **kwargs):
-        self.PID = kwargs.get('PID', '')
-        self.RIGHT_NAME = kwargs.get('RIGHT_NAME', '')
-        self.RIGHT_URL = kwargs.get('RIGHT_URL', '#')
-        self.RIGHT_DESC = kwargs.get('RIGHT_DESC', '')
-        self.IS_LEAF = kwargs.get('IS_LEAF', '1')
-        self.ICON = kwargs.get('ICON', 'wb-desktop')
-        self.SEQ = kwargs.get('SEQ', '')
+        self.pid = kwargs.get('pid', '')
+        self.right_name = kwargs.get('right_name', '')
+        self.right_url = kwargs.get('right_url', '#')
+        self.right_desc = kwargs.get('right_desc', '')
+        self.is_leaf = kwargs.get('is_leaf', '1')
+        self.icon = kwargs.get('icon', 'wb-desktop')
+        self.seq = kwargs.get('seq', '')
         super(Right, self).__init__(**kwargs)
 
     # 权限表名称

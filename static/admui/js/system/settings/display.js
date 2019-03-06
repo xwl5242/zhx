@@ -53,13 +53,13 @@
             $siteNavbar: $('.site-navbar'),
             navbarSkins: 'bg-primary-600 bg-brown-600 bg-cyan-600 bg-green-600 bg-grey-600 bg-indigo-600 bg-orange-600 bg-pink-600 bg-purple-600 bg-red-600 bg-teal-600 bg-yellow-700',
             defaultSettings: {
-                SIDEBAR: 'site-menubar-dark',
-                NAVBAR: 'bg-primary-600',
-                NAVBAR_INVERSE: 'navbar-inverse',
-                THENE_COLOR: 'primary',
-                MENU_DISPLAY: 'site-menubar-unfold',
-                MENU_TXT_ICON: 'site-menubar-keep',
-                TAB_FLAG: 'site-contabs-open'
+                sidebar: 'site-menubar-dark',
+                navbar: 'bg-primary-600',
+                navbar_inverse: 'navbar-inverse',
+                theme_color: 'primary',
+                menu_display: 'site-menubar-unfold',
+                menu_text_icon: 'site-menubar-keep',
+                tab_flag: 'site-contabs-open'
             },
             init: function () {
                 var self = this,
@@ -146,19 +146,19 @@
                             case 'boxLayout':
                                 $('#boxLayout', '#admui-pageContent').prop('checked', v !== "");
                                 break;
-                            case 'SIDEBAR':
+                            case 'sidebar':
                                 $('#skintoolsSidebar').selectpicker('val', [v]);
                                 break;
-                            case 'NAVBAR':
+                            case 'navbar':
                                 $('input[value="' + v + '"]', $("#skintoolsNavbar>ul")).prop('checked', true);
                                 break;
-                            case 'NAVBAR_INVERSE':
+                            case 'navbar_inverse':
                                 $('#navbarDisplay', '#admui-pageContent').prop('checked', v !== '');
                                 break;
-                            case 'MENU_DISPLAY':
+                            case 'menu_display':
                                 $('input[value="' + v + '"]', '#displayForm').prop('checked', true);
                                 break;
-                            case 'MENU_TXT_ICON':
+                            case 'menu_text_icon':
                                 if ($('#menuFold').is(':checked')) {
                                     $('#menuFoldSetting').removeClass('hidden ');
                                     $('input[name="menuTxtIcon"]', '#displayForm').parent('label')
@@ -167,13 +167,13 @@
                                         .parent('label').addClass('active');
                                 }
                                 break;
-                            case 'THEME_COLOR':
+                            case 'theme_color':
                                 $('input[value="' + v + '"]', "#skintoolsPrimary").prop('checked', true);
                                 break;
-                            case 'TAB_FLAG':
+                            case 'tab_flag':
                                 $('input[value="' + v + '"]', '#displayForm').prop('checked', true);
                                 break;
-                            case 'ID':
+                            case 'id':
                             	$('input[value="'+v+'"]','#id');
                         }
                     });
@@ -189,7 +189,7 @@
                 var val = $item.val();
 
                 this.sidebarImprove(val);
-                this.updateSetting('SIDEBAR', val);
+                this.updateSetting('sidebar', val);
             },
             navbarEvents: function ($item) {
                 var val = $item.val(),
@@ -198,9 +198,9 @@
                 this.navbarImprove(val, checked);
 
                 if (val === 'navbar-inverse') {
-                    this.updateSetting('NAVBAR_INVERSE', checked ? val : '');
+                    this.updateSetting('navbar_inverse', checked ? val : '');
                 } else {
-                    this.updateSetting('NAVBAR', val);
+                    this.updateSetting('navbar', val);
                 }
             },
             primaryEvents: function ($item) {
@@ -208,7 +208,7 @@
 
                 this.primaryImprove(val);
 
-                this.updateSetting('THEME_COLOR', val);
+                this.updateSetting('theme_color', val);
             },
             sidebarImprove: function (val) {
                 if (val === 'site-menubar-light') {

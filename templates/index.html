@@ -16,12 +16,12 @@
                 </div>
                 <div class="media-body">
                     <h4 class="media-heading">
-                         欢迎您，{{user.USER_CODE}}
-                        <small>{{user.USER_NAME}}</small>
+                         欢迎您，{{user.user_code}}
+                        <small>{{user.user_name}}</small>
                     </h4>
                     <p>
                         <i class="icon icon-color wb-bell" aria-hidden="true"></i>
-                                                      这是您第{{int(user.LOGIN_TOTAL)+1}}次登录，上次登录日期：{{user.LAST_LOGIN_TIME}}，详细信息请查看
+                                                      这是您第{{int(user.login_total)+1}}次登录，上次登录日期：{{user.last_login_time}}，详细信息请查看
                         <a data-pjax href="/system/account?from=log" target="_blank">日志</a>，如果不是您本人登录，请及时
                         <a data-pjax href="/system/account?from=password" target="_blank">修改密码</a> 。
                     </p>

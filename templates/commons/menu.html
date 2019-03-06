@@ -1,4 +1,4 @@
-<nav class="site-navbar navbar  navbar-fixed-top {{theme.NAVBAR_INVERSE}} {{theme.NAVBAR}}" role="navigation">
+<nav class="site-navbar navbar  navbar-fixed-top {{theme.navbar_inverse}} {{theme.navbar}}" role="navigation">
     <div class="navbar-header">
         <button type="button" class="navbar-toggle hamburger hamburger-close navbar-toggle-left hided" data-toggle="menubar">
             <span class="sr-only">切换菜单</span> <span class="hamburger-bar"></span>
@@ -26,10 +26,10 @@
                     <ul class="nav navbar-toolbar nav-tabs" role="tablist">
                     {% if right %}
                         {% for i,r in enumerate(right)%}
-                            {% if r.PID=='0' %}
+                            {% if r.pid=='0' %}
                                 <li role="presentation" class="{% if i==0 %}active{% end %}">
-		                            <a data-toggle="tab" href="#admui-navTabsItem-{{r.ID}}" aria-controls="admui-navTabsItem-{{r.ID}}" role="tab" aria-expanded="false">
-		                                <i class="icon {{r.ICON}}"></i> <span>{{r.RIGHT_NAME}}</span>
+		                            <a data-toggle="tab" href="#admui-navTabsItem-{{r.id}}" aria-controls="admui-navTabsItem-{{r.id}}" role="tab" aria-expanded="false">
+		                                <i class="icon {{r.icon}}"></i> <span>{{r.right_name}}</span>
 		                            </a>
 		                        </li>
                             {% end %}
@@ -61,7 +61,7 @@
                     </a>
                 </li>
                 <li>
-                    <a class="icon fa-sign-out" id="admui-signOut" data-ctx="/" data-user="{{user.ID}}" href="/logout" role="button">
+                    <a class="icon fa-sign-out" id="admui-signOut" data-ctx="/" data-user="{{user.id}}" href="/logout" role="button">
                     	<span class="sr-only">退出</span>
                    	</a>
                 </li>
@@ -70,15 +70,15 @@
         </div>
     </div>
 </nav>
-<nav class="site-menubar {{theme.SIDEBAR}}" id="admui-siteMenubar">
+<nav class="site-menubar {{theme.sidebar}}" id="admui-siteMenubar">
     <div class="site-menubar-body">
         <div class="tab-content height-full" id="admui-navTabs">
             {% if right %}
                 {% for r in right %}
-                    <div class="tab-pane animation-fade height-full active" id="admui-navTabsItem-{{r.ID}}" role="tabpanel">
+                    <div class="tab-pane animation-fade height-full active" id="admui-navTabsItem-{{r.id}}" role="tabpanel">
 		              <div>
 		                  <ul class="site-menu">
-		                  	<li class="site-menu-category">{{r.RIGHT_NAME}}</li>
+		                  	<li class="site-menu-category">{{r.right_name}}</li>
                                 {% autoescape None %}
 		                  	    {{render_child(r.child)}}
 		                  </ul>

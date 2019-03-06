@@ -214,7 +214,7 @@
 <script>
 	//保存主题样式操作
 	$("button[name='save']").click(function(){
-		$.post('${ctx}/user/updateTheme/'+{{user.ID}},$("#displayForm").serialize(),function(result){
+		$.post('${ctx}/user/updateTheme/'+{{user.id}},$("#displayForm").serialize(),function(result){
 			console.log(result);
 		},'json');
 	});

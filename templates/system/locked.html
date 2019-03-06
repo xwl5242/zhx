@@ -27,12 +27,12 @@
 	<div class=" page animation-fade vertical-align text-center animsition-fade height-full">
 	    <div class="page-content vertical-align-middle">
 	        <div class="avatar avatar-lg">
-	            <img src="{{static_url('admui/images/avatar.svg')}}" alt="{{user.USER_CODE}}">
+	            <img src="{{static_url('admui/images/avatar.svg')}}" alt="{{user.user_code}}">
 	        </div>
-	        <h4 class="locked-user">{{user.USER_CODE}}</h4>
+	        <h4 class="locked-user">{{user.user_code}}</h4>
 	        <form action="/login" method="post" role="form">
 	            <div class="input-group">
-	            	<input type="hidden" name="userCode" value="{{user.USER_CODE}}">
+	            	<input type="hidden" name="userCode" value="{{user.user_code}}">
 	            	<input type="hidden" name="needCaptcha" value="False">
 	            	<input type="hidden" name="validCode" value="true">
 	                <input type="password" class="form-control last" name="password" placeholder="请输入您的密码继续登录">

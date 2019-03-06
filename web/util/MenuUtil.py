@@ -16,17 +16,17 @@ def render_child(right_list):
         right = Row(right)
         global level
         level = level+1
-        is_url = False if right.RIGHT_URL == '#' else True
-        href_url = 'javascript:;' if not is_url else right.RIGHT_URL
+        is_url = False if right.right_url == '#' else True
+        href_url = 'javascript:;' if not is_url else right.right_url
         has_sub = 'has-sub' if len(right.child) > 0 else ''
         url_class = ' data-pjax target="_blank"' if is_url else ''
         has_child = len(right.child) > 0
-        menu_icon = f'<i class="site-menu-icon {right.ICON}" aria-hidden="true"></i>'
+        menu_icon = f'<i class="site-menu-icon {right.icon}" aria-hidden="true"></i>'
         menu_arrow = '<span class="site-menu-arrow"></span>'
 
         html += f'<li class="site-menu-item {has_sub}">' \
                 f'<a href="{href_url}" {url_class}>{menu_icon if level==1 else ""}' \
-                f'<span class="site-menu-title">{right.RIGHT_NAME}</span>{menu_arrow if has_child else ""}</a>'
+                f'<span class="site-menu-title">{right.right_name}</span>{menu_arrow if has_child else ""}</a>'
         if has_child:
             html += f'<ul class="site-menu-sub">{render_child(right.child)}</ul>'
         html += '</li>'
@@ -44,8 +44,8 @@ def menu_tree(right_list, pid):
     menu_list = []
     if right_list:
         for right in right_list:
-            menu_id = right.ID
-            menu_pid = right.PID
+            menu_id = right.id
+            menu_pid = right.pid
             if menu_pid == pid:
                 node = menu_tree(right_list, menu_id)
                 right["child"] = node
@@ -64,15 +64,15 @@ def right_tree(right_list, pid):
     if right_list:
         for right in right_list:
             node = {}
-            if pid == right.PID:
-                node['layer'] = right.ID
-                node['icon'] = right.ICON
+            if pid == right.pid:
+                node['layer'] = right.id
+                node['icon'] = right.icon
                 node['tenantId'] = '8'
-                node['id'] = right.ID
-                node['text'] = right.RIGHT_NAME
-                c_node = right_tree(right_list, right.ID)
+                node['id'] = right.id
+                node['text'] = right.right_name
+                c_node = right_tree(right_list, right.id)
                 node['children'] = c_node
-                if right.STATE == 'true':
+                if right.state == 'true':
                     state = {'selected': True}
                     node['state'] = state
                 tree.append(node)

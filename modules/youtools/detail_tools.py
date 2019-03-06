@@ -11,3 +11,4 @@ class DetailTools(BaseModel):
         self.comments = kwargs.get('comments', '')
         self.plat_label = kwargs.get('plat_label', '')
         self.remark = kwargs.get('remark', '')
+        super(DetailTools, self).__init__(**kwargs)

@@ -60,22 +60,22 @@ class LoginHandler(BaseHandler):
 			user = User.get_by_code(user_code)
 			if user is None:
 				self.render("login.html", message="用户不存在!")
-			elif password != AESUtil.decrypt(user.PASSWORD):
+			elif password != AESUtil.decrypt(user.password):
 				self.render("login.html", message="用户密码不正确!")
 			else:
 				# 登录成功,获取当前登录用户的主题信息
-				theme = Theme.get_by_user_id(user.ID)
+				theme = Theme.get_by_user_id(user.id)
 				# 登录成功,获取当前登录用户的权限信息
-				rights = Right.query_by_user_id(user.ID)
+				rights = Right.query_by_user_id(user.id)
 				menu = menu_tree(right_list=rights, pid="0")
 				# 更新用户相关信息
 				if not user_id:
-					sql = f"update sys_user set last_login_time=now(),login_total=login_total+1 where id = {user.ID}"
+					sql = f"update sys_user set last_login_time=now(),login_total=login_total+1 where id = {user.id}"
 					User.update_by_sql(sql)
 				# 保存相关信息,并跳转
 				self.set_secure_cookie("right", gzip.compress(json.dumps(menu).encode()))
-				self.set_secure_cookie("userId", user.ID)
-				self.set_secure_cookie("themeId", theme.ID)
+				self.set_secure_cookie("userId", user.id)
+				self.set_secure_cookie("themeId", theme.id)
 				self.set_secure_cookie("user", gzip.compress(json.dumps(user).encode()))
 				self.set_secure_cookie("theme", gzip.compress(json.dumps(theme).encode()))
 				self.render("index.html", user=user, theme=theme, theme_json=json.dumps(theme), right=menu, render_child=render_child, T_N=self.T_N)

@@ -8,13 +8,13 @@ class Theme(BaseModel):
     主题和布局
     """
     def __init__(self, **kwargs):
-        self.SIDEBAR = kwargs.get('SIDEBAR')
-        self.NAVBAR = kwargs.get('NAVBAR')
-        self.NAVBAR_INVERSE = kwargs.get('NAVBAR_INVERSE')
-        self.THEME_COLOR = kwargs.get('THEME_COLOR')
-        self.MENU_DISPLAY = kwargs.get('MENU_DISPLAY')
-        self.MENU_TXT_ICON = kwargs.get('MENU_TXT_ICON')
-        self.TAB_FLAG = kwargs.get('TAB_FLAG')
+        self.sidebar = kwargs.get('sidebar')
+        self.navbar = kwargs.get('navbar')
+        self.navbar_inverse = kwargs.get('navbar_inverse')
+        self.theme_color = kwargs.get('theme_color')
+        self.menu_display = kwargs.get('menu_display')
+        self.menu_text_icon = kwargs.get('menu_text_icon')
+        self.tab_flag = kwargs.get('tab_flag')
         super(Theme, self).__init__(**kwargs)
 
     # 主题表

@@ -47,20 +47,20 @@ class RoleSaveHandler(BaseHandler):
         role_auth = self.get_argument("roleAuth")
         if role_id:
             # 修改
-            role = Role(ID=role_id, ROLE_NAME=role_name, ROLE_DESC=role_name)
+            role = Role(id=role_id, role_name=role_name, role_desc=role_name)
             deal_total += Role.update('sys_role', role, where=f" id='{role_id}' ")
             # 需要删除之前的角色和权限的关系
             RoleRight.delete('sys_role_right', where=f" role_id='{role_id}'")
         else:
             # 新增
-            role = Role(ROLE_NAME=role_name, ROLE_DESC=role_name)
+            role = Role(role_name=role_name, role_desc=role_name)
             deal_total += Role.insert('sys_role', role)
         # 新增角色和权限的关系
         for right_id in role_auth.split(','):
-            role_right = RoleRight(ROLE_ID=role['ID'], RIGHT_ID=right_id)
+            role_right = RoleRight(role_id=role['id'], right_id=right_id)
             deal_total += RoleRight.insert('sys_role_right', role_right)
         # 返回页面,id是用来刷新页面使用的
-        self.write({'success': deal_total == len(role_auth.split(','))+1, 'id': role['ID']})
+        self.write({'success': deal_total == len(role_auth.split(','))+1, 'id': role['id']})
 
 
 class RoleDeleteHandler(BaseHandler):

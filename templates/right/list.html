@@ -26,15 +26,15 @@
                 {#$value.rightName?$value.rightName:$value.text 这么写的原因：页面初次进来查询后台数据带出的数据是rightName格式的，但是该页面引用的js中都是text,url,childern #}
                     <script id="navMenu" type="text/html">
 						{@each navMenu@}
-							{@if $value.PID=='0'@}
-								{@if $value.SEQ == '0'@}
-                                	<div class="list-group-item active" data-pid="{@$value.PID@}" data-id="{@$value.ID@}" data-seq="{@$value.SEQ@}" data-text="{@$value.RIGHT_NAME?$value.RIGHT_NAME:$value.text@}" data-layer="{@$value.SEQ@}" data-icon="{@$value.ICON@}" data-auth="" data-children="{@$value.child?$value.child:$value.children | json_str@}">
+							{@if $value.pid=='0'@}
+								{@if $value.seq == '0'@}
+                                	<div class="list-group-item active" data-pid="{@$value.pid@}" data-id="{@$value.id@}" data-seq="{@$value.seq@}" data-text="{@$value.right_name?$value.right_name:$value.text@}" data-layer="{@$value.seq@}" data-icon="{@$value.icon@}" data-auth="" data-children="{@$value.child?$value.child:$value.children | json_str@}">
                             	{@else@}
-                               		<div class="list-group-item" data-pid="{@$value.PID@}" data-id="{@$value.ID@}" data-seq="{@$value.SEQ@}" data-text="{@$value.RIGHT_NAME?$value.RIGHT_NAME:$value.text@}" data-icon="{@$value.ICON@}" data-layer="{@$value.SEQ@}" data-children="{@$value.child?$value.child:$value.children | json_str@}">
+                               		<div class="list-group-item" data-pid="{@$value.pid@}" data-id="{@$value.id@}" data-seq="{@$value.seq@}" data-text="{@$value.right_name?$value.right_name:$value.text@}" data-icon="{@$value.icon@}" data-layer="{@$value.seq@}" data-children="{@$value.child?$value.child:$value.children | json_str@}">
                             	{@/if@}
                                    <div class="list-content">
-                                        <i class="icon topmenu-icon {@$value.ICON@}"></i>
-                                        <span class="top_menuname" data-children="{@$value.child?$value.child:$value.children@}">{@$value.RIGHT_NAME?$value.RIGHT_NAME:$value.text@}</span>
+                                        <i class="icon topmenu-icon {@$value.icon@}"></i>
+                                        <span class="top_menuname" data-children="{@$value.child?$value.child:$value.children@}">{@$value.right_name?$value.right_name:$value.text@}</span>
                                         <div class="item-actions">
                                             <span class="btn btn-pure btn-icon" data-tag="list-editable" data-toggle="modal" data-target="#addMenu"><i class="icon wb-edit" aria-hidden="true"></i></span>
                                             <span class="btn btn-pure btn-icon" data-tag="list-delete"><i class="icon wb-close" aria-hidden="true"></i></span>
@@ -73,41 +73,41 @@
                           	<script id="childMenu" type="text/html">
                                         <ol class="dd-list animation-fade">
                                             {@each menu@}
-                                            <li class="dd-item dd-item-alt" data-pid="{@$value.PID@}" data-id="{@$value.ID@}" data-seq="{@$value.SEQ@}" data-rank="2" data-auth="" data-type="{@$value.type@}" data-text="{@$value.RIGHT_NAME?$value.RIGHT_NAME:$value.text@}" data-url="{@$value.RIGHT_URL?$value.RIGHT_URL:$value.url@}" data-icon="{@$value.ICON@}">
+                                            <li class="dd-item dd-item-alt" data-pid="{@$value.pid@}" data-id="{@$value.id@}" data-seq="{@$value.seq@}" data-rank="2" data-auth="" data-type="{@$value.type@}" data-text="{@$value.right_name?$value.right_name:$value.text@}" data-url="{@$value.RIGHT_URL?$value.RIGHT_URL:$value.url@}" data-icon="{@$value.icon@}">
                                                 <div class="dd-handle"></div>
                                                 {@if $index == 0@}
                                                 <div class="dd-content active">
                                                     {@else@}
                                                     <div class="dd-content">
                                                         {@/if@}
-                                                        <span class="menu-name">{@if $value.ICON@}<i class="menu-icon {@$value.ICON@}"></i>{@/if@} {@$value.RIGHT_NAME?$value.RIGHT_NAME:$value.text@}</span>
+                                                        <span class="menu-name">{@if $value.icon@}<i class="menu-icon {@$value.icon@}"></i>{@/if@} {@$value.right_name?$value.right_name:$value.text@}</span>
                                                         <span class="pull-right fa-angle-right"></span>
                                                     </div>
                                                     {@if $value.child?$value.child:$value.children@}
                                                     <ol class="dd-list">
                                                         {@each $value.child?$value.child:$value.children@}
-                                                        <li class="dd-item dd-item-alt" data-pid="{@$value.PID@}" data-seq="{@$value.SEQ@}" data-id="{@$value.ID@}" data-rank="3" data-auth="" data-type="{@$value.type@}" data-text="{@$value.RIGHT_NAME?$value.RIGHT_NAME:$value.text@}" data-url="{@$value.RIGHT_URL?$value.RIGHT_URL:$value.url@}" data-icon="{@$value.ICON@}">
+                                                        <li class="dd-item dd-item-alt" data-pid="{@$value.pid@}" data-seq="{@$value.seq@}" data-id="{@$value.id@}" data-rank="3" data-auth="" data-type="{@$value.type@}" data-text="{@$value.right_name?$value.right_name:$value.text@}" data-url="{@$value.RIGHT_URL?$value.RIGHT_URL:$value.url@}" data-icon="{@$value.icon@}">
                                                             <div class="dd-handle"></div>
                                                             <div class="dd-content">
-                                                                <span class="menu-name">{@if $value.ICON@}<i class="menu-icon {@$value.ICON@}"></i>{@/if@} {@$value.RIGHT_NAME?$value.RIGHT_NAME:$value.text@}</span>
+                                                                <span class="menu-name">{@if $value.icon@}<i class="menu-icon {@$value.icon@}"></i>{@/if@} {@$value.right_name?$value.right_name:$value.text@}</span>
                                                                 <span class="pull-right fa-angle-right"></span>
                                                             </div>
                                                             {@if $value.child?$value.child:$value.children@}
                                                             <ol class="dd-list">
                                                                 {@each $value.child?$value.child:$value.children@}
-                                                                <li class="dd-item dd-item-alt" data-pid="{@$value.PID@}" data-seq="{@$value.SEQ@}" data-id="{@$value.ID@}" data-auth="" data-type="{@$value.type@}" data-rank="4" data-text="{@$value.RIGHT_NAME?$value.RIGHT_NAME:$value.text@}" data-url="{@$value.RIGHT_URL?$value.RIGHT_URL:$value.url@}" data-icon="{@$value.ICON@}">
+                                                                <li class="dd-item dd-item-alt" data-pid="{@$value.pid@}" data-seq="{@$value.seq@}" data-id="{@$value.id@}" data-auth="" data-type="{@$value.type@}" data-rank="4" data-text="{@$value.right_name?$value.right_name:$value.text@}" data-url="{@$value.RIGHT_URL?$value.RIGHT_URL:$value.url@}" data-icon="{@$value.icon@}">
                                                                     <div class="dd-handle"></div>
                                                                     <div class="dd-content">
-                                                                        <span class="menu-name">{@if $value.ICON@}<i class="menu-icon {@$value.ICON@}"></i>{@/if@} {@$value.RIGHT_NAME?$value.RIGHT_NAME:$value.text@}</span>
+                                                                        <span class="menu-name">{@if $value.icon@}<i class="menu-icon {@$value.icon@}"></i>{@/if@} {@$value.right_name?$value.right_name:$value.text@}</span>
                                                                         <span class="pull-right fa-angle-right"></span>
                                                                     </div>
                                                                     {@if $value.child?$value.child:$value.children@}
                                                                     <ol class="dd-list">
                                                                         {@each $value.child?$value.child:$value.children@}
-                                                                        <li class="dd-item dd-item-alt" data-pid="{@$value.PID@}" data-seq="{@$value.SEQ@}" data-id="{@$value.ID@}" data-rank="5" data-text="{@$value.RIGHT_NAME?$value.RIGHT_NAME:$value.text@}" data-auth="" data-type="{@$value.type@}" data-url="{@$value.RIGHT_URL?$value.RIGHT_URL:$value.url@}" data-icon="{@$value.ICON@}">
+                                                                        <li class="dd-item dd-item-alt" data-pid="{@$value.pid@}" data-seq="{@$value.seq@}" data-id="{@$value.id@}" data-rank="5" data-text="{@$value.right_name?$value.right_name:$value.text@}" data-auth="" data-type="{@$value.type@}" data-url="{@$value.RIGHT_URL?$value.RIGHT_URL:$value.url@}" data-icon="{@$value.icon@}">
                                                                             <div class="dd-handle"></div>
                                                                             <div class="dd-content">
-                                                                                <span class="menu-name">{@if $value.ICON@}<i class="menu-icon {@$value.ICON@}"></i>{@/if@} {@$value.RIGHT_NAME?$value.RIGHT_NAME:$value.text@}</span>
+                                                                                <span class="menu-name">{@if $value.icon@}<i class="menu-icon {@$value.icon@}"></i>{@/if@} {@$value.right_name?$value.right_name:$value.text@}</span>
                                                                                 <span class="pull-right fa-angle-right"></span>
                                                                             </div>
                                                                         </li>

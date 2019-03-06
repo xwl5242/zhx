@@ -10,4 +10,6 @@ class Dict(BaseModel):
         self.dc_k = kwargs.get('dc_k', '')
         self.dc_v = kwargs.get('dc_v', '')
         self.dc_desc = kwargs.get('dc_desc', '')
+        super(Dict, self).__init__(**kwargs)
+
 

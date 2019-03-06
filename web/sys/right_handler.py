@@ -65,14 +65,14 @@ class RightSaveHandler(BaseHandler):
             # 初始化权限对象
             if opea_type == 'add':
                 # 新增操作
-                right = Right(ID=menu['id'], PID=menu['pid'], RIGHT_URL=menu['url'], SEQ=str(seq+5),
-                              RIGHT_NAME=menu['text'], ICON=menu['icon'], CREATOR=str(cur_user), UPDATOR=str(cur_user))
+                right = Right(id=menu['id'], pid=menu['pid'], right_url=menu['url'], seq=str(seq+5),
+                              right_name=menu['text'], icon=menu['icon'], creator=str(cur_user), updator=str(cur_user))
                 # 新增权限
                 total += Right.insert('sys_right', right)
             else:
                 # 修改操作
-                right = Right(ID=menu['id'], RIGHT_URL=menu['url'], RIGHT_NAME=menu['text'],
-                              ICON=menu['icon'], UPDATE_TIME=time.strftime('%Y-%m-%d %H:%M:%S', time.localtime()))
+                right = Right(id=menu['id'], right_url=menu['url'], right_name=menu['text'],
+                              icon=menu['icon'], update_time=time.strftime('%Y-%m-%d %H:%M:%S', time.localtime()))
                 # 修改权限
                 total += Right.update('sys_right', right, where=f" id='{menu['id']}'")
                 # 删除之前的角色和权限的关系
@@ -81,7 +81,7 @@ class RightSaveHandler(BaseHandler):
             # 新增权限和角色关系
             auth_list = list(menu['auth'])
             for auth in auth_list:
-                role_right = RoleRight(ROLE_ID=auth['id'], RIGHT_ID=right['ID'])
+                role_right = RoleRight(role_id=auth['id'], right_id=right['id'])
                 total += RoleRight.insert('sys_role_right', role_right)
             self.write({'success': total == len(auth_list)+1})
 
